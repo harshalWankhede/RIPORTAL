@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% load static %}
+{% static "images" as baseUrl %}
+
+
+<!----------------------form style-------------------->
+<style>
+body {
+  font-family: Arial;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+
+<!----------------------form style end----------------->
+<style>
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<!--  open sidebar style-->
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+
+
+
+
+ <title>FLASK</title>
+
+</head>
+<body   style=" background-image: url('{% static 'images\bgimg.jpg' %}');
+height: 100%;
+ background-repeat: no-repeat;
+  background-size: cover;">
+
+<div class="row">
+    <div class="col s4"><a href="#" class="brand-logo left"><img src="{% static 'images\uscclogo.png' %}" width=250px; height=60px;></a></div>
+        <a href="#" class="brand-logo right" style="margin:0 300px 0 0"><img src="{% static 'images\amdocs.png' %}" width=250px; height=60px;"></a>
+    </div>
+</div>
+
+
+
+
+ {% if user.is_authenticated %}
+
+
+    <!--=======================================================================SIDE NAVE starts==================================================================-->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% static '../../' %}">HOME PAGE</a>
+    <a href="{% static '../APP1/RimErrors' %}">RIM ERRORS PAGE</a>
+    <a href="{% static '../APP1/upload' %}">Upload a Flask Card</a>
+    <a href="{% static '../APP1/approved' %}">My Approved Cards</a>
+    <a href="{% static '../APP1/unapproved' %}">My pending Cards</a>
+    <a href="{% static '../accounts/logout' %}">Logout</a>
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰ MY ACTIONS</button>
+<!-----------------------------------------------------------------------filter form-------------------->
+<div class="row" id="filter" style="display:block">
+     <div class="col s4">
+          <fieldset>
+      <legend>FILTER</legend>
+
+  <form method="get" >
+            {{ form.errors }}
+
+                {{ filter.form.id.label_tag }}
+                {% render_field filter.form.id class="form-control" %}
+
+                {{ filter.form.title.label_tag }}
+                {% render_field filter.form.title class="form-control" %}
+
+            {{ filter.form.desc.label_tag }}
+            {% render_field filter.form.desc class="form-control" %}
+
+                {{ filter.form.example_inc.label_tag }}
+                {% render_field filter.form.example_inc %}
+
+                <label for="start date"> {{ filter.form.start_date.label_tag }}</label>
+              <input type="date" id= '{% render_field filter.form.start_date  %}'>
+
+
+                    <label for=" end date">{{ filter.form.end_date.label_tag }}</label>
+                    <input type="date" id='{% render_field filter.form.end_date  %}'>
+<br>
+
+            <label for=" Submited by">{{ filter.form.user_id.label_tag }}</label>
+          {% render_field filter.form.user_id %}
+
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search">Search</span>
+      </button>
+
+
+  </form>
+    </fieldset>
+      </div>
+
+
+      <div class="col s4">
+      </div>
+
+
+
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+<!--======================================================================= Form FIlter Starts=======================================================================-->
+    </div>
+
+
+
+
+    <!---------------------------------filter form ends-------------------------------------------->
+
+</div>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+  {% else %}
+<!-------------------------------------------------------------------------NEW SIED NAV FOR NOT LOGIN--------------------------------------------------------------------------------------->
+
+
+<div id="mySidebar" class="sidebar">
+    <a href="#" class="brand-logo left"><img src="{% static 'images\uscclogo.png' %}" width=200px; height=60px;></a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% static '../../' %}">HOME PAGE</a>
+    <a href="{% static '../APP1/RimErrors' %}">RIM ERRORS PAGE</a>
+    <a href="{% static '../APP1/search' %}">SEARCH CARDS BY FILTER</a>
+
+</div>
+
+<br id="main">
+  <button type="submit"  class="openbtn" onclick="openNav()">☰ MY ACTIONS</button>
+    <button type="submit" class="btn" onclick="myLoginFunction();">Login</button>
+    <button type="submit" class="btn" onclick="myRegisterFunction();">Register</button>
+    <a href="{% static '../admin' %}"><button type="submit" class="btn">Admin Login</button></a>
+
+
+<div class="row" id="userDetails" >
+ <div>
+
+
+
+
+    <!--=======================================================================Login Form Starts=======================================================================-->
+
+<div class="row" id="login" style="display:none">
+
+      <div class="col s4" >
+          <form action="{% static '../accounts/login' %}" method="post">
+                 <fieldset>
+      <legend>LOGIN</legend>
+    {% csrf_token %}
+
+
+<label >ENTER USER NAME</label>
+<input type="text" name="username" id="user_name" class="validate" REQUIRED  >
+<label >ENTER PASSWORD</label>
+<input id="password" type="password" name="password" class="validate" REQUIRED>
+
+<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+</fieldset>
+</form>
+      </div>
+
+      <div class="col s4">
+
+
+   <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+
+</div>
+
+<!---------------------login form ends------------------------------------->
+
+     <!--=======================================================================Register Form Starts=======================================================================-->
+
+<div class="row" id="register" style="display:none">
+
+      <div class="col s4">
+          <fieldset>
+      <legend>REGISTER</legend>
+        <form action="{% static '../accounts/register' %}" method="post">
+{% csrf_token %}
+<label >ENTER FIRST NAME</label>
+<input type="text" name="first_name" required  >
+<label>ENTER LAST NAME </label>
+<input type="text" name="last_name">
+<label>ENTER A USERNAME</label>
+<input type="text" name="username" required >
+    <label>ENTER EMAIL ID </label>
+<input type="email" name="email" required>
+    <label>ENTER ENTER PASSWORD </label>
+<input type="password" name="password1" required>
+    <label>PLEASE CONFIRM PASSWORD</label>
+<input type="password" name="password2" required>
+
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+
+</form>
+          </fieldset>
+      </div>
+
+
+      <div class="col s4">
+      </div>
+
+
+
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+
+
+<!--=======================================================================Register Form Ends=======================================================================-->
+<!--======================================================================= Form FIlter Starts=======================================================================-->
+
+<div class="row" id="filter" style="display:block">
+     <div class="col s4">
+          <fieldset>
+      <legend>FILTER</legend>
+
+  <form method="get" >
+            {{ form.errors }}
+
+                {{ filter.form.id.label_tag }}
+                {% render_field filter.form.id class="form-control" %}
+
+                {{ filter.form.title.label_tag }}
+                {% render_field filter.form.title class="form-control" %}
+
+            {{ filter.form.desc.label_tag }}
+            {% render_field filter.form.desc class="form-control" %}
+
+                {{ filter.form.example_inc.label_tag }}
+                {% render_field filter.form.example_inc %}
+
+                <label for="start date"> {{ filter.form.start_date.label_tag }}</label>
+              <input type="date" id= '{% render_field filter.form.start_date  %}'>
+
+
+                    <label for=" end date">{{ filter.form.end_date.label_tag }}</label>
+                    <input type="date" id='{% render_field filter.form.end_date  %}'>
+
+            <label for=" Submited by">{{ filter.form.user_id.label_tag }}</label>
+            <input type="radio" id="{% render_field filter.form.user_id.class_form %}">
+
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search">Search</span>
+      </button>
+
+
+  </form>
+    </fieldset>
+      </div>
+
+
+      <div class="col s4">
+      </div>
+
+
+
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+<!--======================================================================= Form FIlter Starts=======================================================================-->
+    </div>
+
+
+
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</div>
+
+<!-------------------------------------------------------------------------NEW SIED NAV FOR NOT LOGIN--------------------------------------------------------------------------------------->
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+    <!-----------------------------------search page starts--------------------------------------->
+
+   <!------------------------------------------------------------------------Search filter start------------------------------------->
+
+<!------------------------------------------------------------------------Search filter end------------------------------------->
+
+<br></br>
+
+    <table class="centered"  background="{% static 'images\tablebg.png' %}">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+          <th>IMAGE</th>
+        <th>DESCRIPTION</th>
+        <th>EXAMPLE INCIDENT</th>
+        <th>RESOLUTION</th>
+         <th>UPLOADED BY</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Issue in filter.qs %}
+        <tr>
+          <td>{{ Issue.id }}</td>
+          <td>{{ Issue.title }}</td>
+           <td><img class="activator" src="{{Issue.img.url}}" height=150px;></td>
+          <td>{{ Issue.desc }}</td>
+          <td>{{ Issue.example_inc }}</td>
+          <td>{{ Issue.resolution }}</td>
+            <td>{{ Issue.user_id }}</td>
+          <td>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+
+    <!-----------------------------form end--------------->
+      </div>
+
+
+
+
+
+
+</div>
+</body>
+</html>

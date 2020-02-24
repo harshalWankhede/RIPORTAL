@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+
+
+{% load widget_tweaks %}
+
+{% load static %}
+{% static "images" as baseUrl %}
+
+<html>
+  <head>
+
+    <title>WELCOME TO FLASK</title>
+      <link rel="stylesheet" href="{% static 'css\materialize.css' %}">
+      <link href="{% static 'css/materialize.min.css' %}" type="text/css' %}" rel="stylesheet" media="screen,projection"/>
+      <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+  <body>
+
+
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+
+
+
+<!-- ==============================================================================FOOTER Start ===========================================================================ends -->
+  <footer class="page-footer black">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a amdocs .</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+<!-- ==============================================================================FOOTER END ===========================================================================ends -->
+
+
+
+
+<script type="text/javascript" src="{% static 'js/materialize.js' %}"> </script>
+  <script src="{% static 'js/init.js' %}"></script>
+</body>
+</html>

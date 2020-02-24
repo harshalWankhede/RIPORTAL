@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% static "images" as baseUrl %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<!--  open sidebar style-->
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
+
+
+
+<!--  -->
+    <title>FLASK</title>
+<link rel="stylesheet" href="{% static 'css\materialize.css' %}">
+      <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body   style=" background-image: url('{% static 'images\bgimg.jpg' %}');
+height: 100%;
+ background-repeat: no-repeat;
+  background-size: cover;">
+
+<div class="row">
+    <div class="col s4"><a href="#" class="brand-logo left"><img src="{% static 'images\uscclogo.png' %}" width=250px; height=60px;></a></div>
+        <a href="#" class="brand-logo right" style="margin:0 300px 0 0"><img src="{% static 'images\amdocs.png' %}" width=250px; height=60px;"></a>
+    </div>
+<!--=======================================================================Nav Bar Ends=======================================================================-->
+
+
+
+<!-- =======================================================================Page Content Starts=======================================================================-->
+<div style="height:100px; width:100%; background-color:#fff; opacity:0"></div>
+
+ {% if user.is_authenticated %}
+
+
+    <!--=======================================================================SIDE NAVE starts==================================================================-->
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% static '../../' %}">HOME PAGE</a>
+    <a href="{% static '../APP1/RimErrors' %}">RIM ERRORS PAGE</a>
+    <a href="{% static '../APP1/search' %}">SEARCH FLASK CARD BY FILTERS</a>
+    <a href="{% static '../APP1/approved' %}">My Approved Cards</a>
+    <a href="{% static '../APP1/unapproved' %}">My pending Cards</a>
+    <a href="{% static '../accounts/logout' %}">Logout</a>
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰ MY ACTIONS</button>
+
+<div style="height:75px; width:100%; background-color:#fff; opacity:0;"></div>
+<!-- =======================================================================ROW 1 Starts=======================================================================-->
+  <div class="row" style="margin: 70px;border: 3px solid black;">
+<!-- =======================================================================Error 1 Starts=======================================================================-->
+
+
+      {% if case %}
+      {% for case in case%}
+        <div class="col s4">
+
+            <div class="card z-depth-5"  style="height:500px; border-radius:30px;background-color:#000000;">
+    <!--<div class="card-image waves-effect waves-block waves-light" style="border: solid white 1px ; border-radius:50px;">-->
+                <div class="card-image waves-effect waves-block waves-light" >
+                    <img class="activator" src="{{case.img.url}}" height=300px; >
+                </div>
+
+                    <div class="card-content" style="color:#000000;">
+                    <span class="card-title activator grey-text text-darken-4"><font color="white">{{case.title}}</font></span>
+                    </div>
+                        <div class="card-reveal">
+                            <div style="background-color:#222; font-family:verdana;font-size:100%; text-align: center; color:white">Issue ID : {{case.id}} </div>
+                                <span class="card-title grey-text text-darken-4">{{case.title}}<i class="material-icons right">close</i></span>
+                                <img class="activator" src="{{case.img.url}}">
+                                <p><b>Example Tickets: </b>{{case.example_inc}}</p>
+                                <p><b>Description: </b>{{case.desc}}</p>
+                                <p><b>Resolution: </b>{{case.resolution}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+        {% endfor %}
+
+      {% else %}
+      <h4>YOU HAVE NO PENDING CARDS</h4>
+{% endif %}
+                </div>
+            </div>
+
+     <!-- =======================================================================ROW 1 Ends=======================================================================-->
+
+
+
+     <!--=======================================================================Login Form Ends=======================================================================-->
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+
+
+</div>
+  {% else %}
+
+
+
+<!-------------------------------------------------------------------------NEW SIED NAV FOR NOT LOGIN--------------------------------------------------------------------------------------->
+
+
+<div id="mySidebar" class="sidebar">
+    <a href="#" class="brand-logo left"><img src="{% static 'images\uscclogo.png' %}" width=200px; height=60px;></a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% static '../../' %}">HOME PAGE</a>
+    <a href="{% static '../APP1/RimErrors' %}">RIM ERRORS PAGE</a>
+    <a href="{% static '../APP1/search' %}">SEARCH CARDS BY FILTER</a>
+
+</div>
+
+<div id="main">
+  <button type="submit"  class="openbtn" onclick="openNav()">☰ MY ACTIONS</button>
+    <button type="submit" class="btn" onclick="myLoginFunction();">Login</button>
+    <button type="submit" class="btn" onclick="myRegisterFunction();">Register</button>
+    <a href="{% static '../admin' %}"><button type="submit" class="btn">Admin Login</button></a>
+
+
+<div class="row" id="userDetails" >
+ <div>
+
+
+
+
+    <!--=======================================================================Login Form Starts=======================================================================-->
+
+<div class="row" id="login" style="display:none">
+
+      <div class="col s4" >
+          <form action="{% static '../accounts/login' %}" method="post">
+                 <fieldset>
+      <legend>LOGIN</legend>
+    {% csrf_token %}
+
+
+<label >ENTER USER NAME</label>
+<input type="text" name="username" id="user_name" class="validate" REQUIRED  >
+<label >ENTER PASSWORD</label>
+<input id="password" type="password" name="password" class="validate" REQUIRED>
+
+<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+</fieldset>
+</form>
+      </div>
+
+      <div class="col s4">
+
+
+   <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+
+</div>
+
+<!---------------------login form ends------------------------------------->
+
+     <!--=======================================================================Register Form Starts=======================================================================-->
+
+<div class="row" id="register" style="display:none">
+
+      <div class="col s4">
+          <fieldset>
+      <legend>REGISTER</legend>
+        <form action="{% static '../accounts/register' %}" method="post">
+{% csrf_token %}
+<label >ENTER FIRST NAME</label>
+<input type="text" name="first_name" required  >
+<label>ENTER LAST NAME </label>
+<input type="text" name="last_name">
+<label>ENTER A USERNAME</label>
+<input type="text" name="username" required >
+    <label>ENTER EMAIL ID </label>
+<input type="email" name="email" required>
+    <label>ENTER ENTER PASSWORD </label>
+<input type="password" name="password1" required>
+    <label>PLEASE CONFIRM PASSWORD</label>
+<input type="password" name="password2" required>
+
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+
+</form>
+          </fieldset>
+      </div>
+
+
+      <div class="col s4">
+      </div>
+
+
+
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+
+
+<!--=======================================================================Register Form Ends=======================================================================-->
+
+
+
+         <!-- =======================================================================Page Content Starts=======================================================================-->
+<div style="height:75px; width:100%; background-color:#fff; opacity:0;"></div>
+<!-- =======================================================================ROW 1 Starts=======================================================================-->
+    <div class="row" style="margin: 70px;border: 3px solid black;">
+<!-- =======================================================================Error 1 Starts=======================================================================-->
+{% for case in case%}
+
+      {% if case.show %}
+        <div class="col s4">
+
+            <div class="card z-depth-5"  style="height:500px; border-radius:30px;background-color:#000000;">
+    <!--<div class="card-image waves-effect waves-block waves-light" style="border: solid white 1px ; border-radius:50px;">-->
+                <div class="card-image waves-effect waves-block waves-light" >
+                    <img class="activator" src="{{case.img.url}}" height=300px; >
+                </div>
+
+                    <div class="card-content" style="color:#000000;">
+                    <span class="card-title activator grey-text text-darken-4"><font color="white">{{case.title}}</font></span>
+                    </div>
+                        <div class="card-reveal">
+                            <div style="background-color:#222; font-family:verdana;font-size:100%; text-align: center; color:white">Issue ID : {{case.id}} </div>
+                                <span class="card-title grey-text text-darken-4">{{case.title}}<i class="material-icons right">close</i></span>
+                                <img class="activator" src="{{case.img.url}}">
+                                <p><b>Example Tickets: </b>{{case.example_inc}}</p>
+                                <p><b>Description: </b>{{case.desc}}</p>
+                                <p><b>Resolution: </b>{{case.resolution}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+        {% endif %}
+{% endfor %}
+                </div>
+            </div>
+
+     <!-- =======================================================================ROW 1 Ends=======================================================================-->
+
+
+
+     <!--=======================================================================Login Form Ends=======================================================================-->
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</div>
+
+<!-------------------------------------------------------------------------NEW SIED NAV FOR NOT LOGIN--------------------------------------------------------------------------------------->
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+<!--======================================================================= Alert box for Message Starts=======================================================================-->
+
+<div class="row">
+
+      <div >
+        <!-- Promo Content 1 goes here -->
+      </div>
+      <div class="col s4">
+        {% for message in messages %}
+
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+   {{message}}</div>
+
+{% endfor %}
+
+
+      </div>
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+<!--======================================================================= Aler bo xor  Message Ends  =======================================================================-->
+
+
+<script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/testing.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="{% static 'js/materialize.js' %}"> </script>
+ <script src="{% static 'js/init.js' %}"></script>
+</body>
+</html>

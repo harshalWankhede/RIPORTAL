@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% static "images" as baseUrl %}
+
+<head>
+
+    <title>WELCOME TO FLASK</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+      <link href="{% static 'css/materialize.min.css' %}" type="text/css' %}" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body >
+<img src="{% static 'images\uscclogo.jpg' %}" width=100px; height=60px;>
+<img src="{% static 'images\amdocs.jpg' %}" width=100px; height=60px;>
+<!--=======================================================================Nav Bar Starts=======================================================================-->
+
+
+<nav>
+    <div class="nav-wrapper">
+
+      <ul class="left hide-on-med-and-down">
+        <li><a href="/">RIM Internal Errors</a></li>
+          {% if user.is_authenticated %}
+          <li>WECLOME <b>{{user.first_name}} </b></li>
+
+          <li><a href="{% static '../accounts/logout' %}">LOGOUT</a></li>
+           <li><a href="{% static '../upload' %}">UPLOAD YOUR FLASK CARD</a></li>
+          <li><a href="{% static '../search' %}">SEARCH FLASK CARD BY FILTERS</a></li>
+                </ul>
+    </div>
+  </nav>
+   <ul class="collection with-header">
+        <li class="collection-header"><h5>USER DETAILS:</h5></li>
+        <li class="collection-item">FIRST NAME: {{user.first_name}} </li>
+        <li class="collection-item">LAST NAME:  {{user.last_name}}</li>
+        <li class="collection-item">USER NAME: {{user.username}}</li>
+        <li class="collection-item">EMAIL ID: {{user.email}}</li>
+       <li class="collection-item">DATE JOINED: {{user.date_joined}}</li>
+       <a href="{% static '../APP1/approved' %}" class="collection-item">APPROVED ADMIN UPLOADS</a>
+       <a href="{% static '../APP1/unapproved' %}" class="collection-item">PENDING ADMIN UPLOADS</a>
+   </ul>
+
+            {% else %}
+
+            <title>HTML Redirect</title>
+    <meta http-equiv="refresh"
+        content="3; url = {% static '../accounts/login' %}" />
+
+          </h3>
+<br>
+    <br>
+          <br>
+    <h1 style="text-align:center;color:green;">
+         REDIRECTING TO LOGIN PAGE
+    </h1>
+    <p style="text-align:center;">
+        If your browser supports Refresh,
+        you'll be redirected to LoginPage, in 3 seconds.
+    </p>
+
+
+          {% endif %}
+
+
+
+
+<!--=======================================================================Nav Bar Ends=======================================================================-->
+
+<!-- =======================================================================Page Content Starts=======================================================================-->
+
+<!-- =======================================================================ROW 1 Starts=======================================================================-->
+
+<!-- =======================================================================Error 1 Starts=======================================================================-->
+
+<!-- ==============================================================================FOOTER Start ===========================================================================ends -->
+  <footer class="page-footer black">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a amdocs .</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+<!-- ==============================================================================FOOTER END ===========================================================================ends -->
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/materialize.js' %}"> </script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+</body>
+</html>

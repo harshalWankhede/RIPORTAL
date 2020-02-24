@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as baseUrl %}
+
+<html lang="en">
+<head>
+
+
+
+
+    <meta charset="UTF-8">
+    <title>REGISTER PAGE</title>
+    <link rel="stylesheet" href="{% static 'css\materialize.css' %}">
+      <link href="{% static 'css/materialize.min.css' %}" type="text/css' %}" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body >
+
+
+<!--=======================================================================Nav Bar Starts=======================================================================-->
+<nav>
+    <div class="nav-wrapper">
+<img src="{% static 'images\uscclogo.jpg' %}" width=100px; height=60px;>
+      <ul class="left hide-on-med-and-down">
+        <li><a href="/">RIM Internal Errors</a></li>
+          {% if user.is_authenticated %}
+          <li>WECLOME <b>{{user.first_name}} </b></li>
+
+          <li><a href="{% static '../accounts/logout' %}">LOGOUT</a></li>
+           <li><a href="{% static '../APP1/upload' %}">UPLOAD YOUR FLASK CARD</a></li>
+           <li><a href="{% static '../APP1/search1' %}">ACCOUNT INFORMATION</a></li>
+
+          <li><a href="APP1/search">SEARCH FLASK CARD BY FILTERS</a></li>
+            {% else %}
+          <li><a href="{% static '../accounts/register' %}">REGISTER</a></li>
+        <li><a href="{% static '../accounts/login' %}">LOGIN</a></li>
+          <li><a href="{% static '../search' %}">SEARCH FLASK CARD BY FILTERS</a></li>
+          <li><a href="{% static '../admin' %}">ADMIN LOGIN</a></li>
+        {% endif %}
+
+      </ul>
+
+    </div>
+  </nav>
+
+<div style="height:125px; width:100%; background-color:#fff;"></div>
+<!--=======================================================================Login Form Starts=======================================================================-->
+
+<div class="row">
+
+      <div class="col s4">
+        <!-- Promo Content 1 goes here -->
+      </div>
+
+
+      <div class="col s4">
+
+
+          <form action="register" method="post">
+{% csrf_token %}
+<label >ENTER FIRST NAME</label>
+<input type="text" name="first_name" required  >
+<label>ENTER LAST NAME </label>
+<input type="text" name="last_name">
+<label>ENTER A USERNAME</label>
+<input type="text" name="username" required >
+    <label>ENTER EMAIL ID </label>
+<input type="email" name="email" required>
+    <label>ENTER ENTER PASSWORD </label>
+<input type="password" name="password1" required>
+    <label>PLEASE CONFIRM PASSWORD</label>
+<input type="password" name="password2" required>
+
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+
+</form>
+
+
+
+      </div>
+
+
+
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+
+
+<!--=======================================================================Login Form Ends=======================================================================-->
+<!--=======================================================================Validation Message Starts=======================================================================-->
+<div class="row">
+
+      <div class="col s4">
+        <!-- Promo Content 1 goes here -->
+      </div>
+      <div class="col s4">
+        {% for message in messages %}
+    <h4 style="color:red;">{{message}}</h4>
+    {% endfor %}
+      </div>
+      <div class="col s4">
+        <!-- Promo Content 3 goes here -->
+      </div>
+
+    </div>
+<!--=======================================================================Validation Message Ends  =======================================================================-->
+
+<script type="text/javascript" src="{% static 'js/materialize.js' %}"> </script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+
+
+
+</body>
+</html>
